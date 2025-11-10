@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>연속 사용 경고 명언</title>
+<style>
+body{
+  font-family: 'Nunito', sans-serif;
+  background: #f3fff9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+.message-box{
+  position: fixed;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  background:#9ee6cf;
+  padding:30px 40px;
+  border-radius:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.1);
+  text-align:center;
+  display:none;
+  color:#053827;
+  font-weight:700;
+  font-size:18px;
+  z-index:9999;
+}
+button.close-btn{
+  margin-top:15px;
+  padding:6px 12px;
+  border:none;
+  border-radius:10px;
+  background:#7fdac1;
+  color:#053827;
+  font-weight:600;
+  cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="message-box" id="quoteBox">
+  <div id="quoteText">명언이 여기에 표시됩니다.</div>
+  <button class="close-btn" onclick="closeQuote()">닫기</button>
+</div>
+
+<script>
+// 명언 목록
+const quotes = [
+  "오늘 할 수 있는 일을 내일로 미루지 마세요.",
+  "작은 성취가 큰 성공의 시작입니다.",
+  "꾸준함은 천재를 이긴다.",
+  "실패는 성공의 어머니입니다.",
+  "포기하지 않으면 반드시 길이 열린다."
+];
+
+let activeStart = null;
+let quoteShown = false;
+
+// 체크 제외 시간
+function isExcludedTime(){
+  const now = new Date();
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  const time = hours*60 + minutes; // 분 단위
+
+  // 오전 8:30 ~ 12:50
+  const morningStart = 8*60+
